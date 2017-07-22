@@ -38,16 +38,16 @@ func getpwuid(user int) (*GECOS, error) {
 	if len(els) < 4 {
 		return nil, fmt.Errorf("Expected 4 or 5 elements, got %d", len(els))
 	}
-	gecos := GECOS{
+	ret := GECOS{
 		Name:        els[0],
 		Room:        els[1],
 		OfficePhone: els[2],
 		HomePhone:   els[3],
 	}
 	if len(els) >= 5 {
-		gecos.Other = els[4]
+		ret.Other = els[4]
 	}
-	return &gecos, nil
+	return &ret, nil
 }
 
 func Lookup(user *user.User) (*GECOS, error) {
